@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Model Agency | Nigeria's Premier Modeling Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Didact+Gothic&display=swap" rel="stylesheet" />
+  <style>
+    /* ===================== RESET & BASE ===================== */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D5A0;
+      --gold-dark: #8B6914;
+      --obsidian: #0A0A0A;
+      --charcoal: #141414;
+      --smoke: #2A2A2A;
+      --ivory: #F7F4EE;
+      --muted: #888;
+      --serif: 'Cormorant Garamond', serif;
+      --sans: 'Didact Gothic', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--obsidian);
+      color: var(--ivory);
+      font-family: var(--sans);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ===================== CUSTOM CURSOR ===================== */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
+    }
+
+    body:hover .cursor-ring { opacity: 1; }
+
+    /* ===================== TICKER ===================== */
+    .ticker-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      background: var(--gold);
+      padding: 6px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      animation: ticker 35s linear infinite;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--obsidian);
+      font-weight: bold;
+      font-family: var(--sans);
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(100vw); }
+      to   { transform: translateX(-100%); }
+    }
+
+    /* ===================== NAVIGATION ===================== */
+    nav {
+      position: fixed;
+      top: 28px; left: 0; right: 0;
+      z-index: 400;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5rem;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.92), transparent);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-logo span { font-style: italic; color: var(--ivory); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.55rem 1.4rem;
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-cta:hover { background: var(--gold); color: var(--obsidian); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      margin-top: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 9rem 5rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.2s forwards;
+    }
+
+    .eyebrow-line {
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 5.5vw, 5.8rem);
+      font-weight: 300;
+      line-height: 1.04;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.4s forwards;
+    }
+
+    .hero-title .italic-gold {
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 0.82rem;
+      line-height: 2;
+      color: var(--muted);
+      max-width: 400px;
+      margin-bottom: 3rem;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 1s 0.6s forwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 1s 0.8s forwards;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--obsidian);
+      border: none;
+      padding: 1rem 2.8rem;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ivory);
+      border: none;
+      border-bottom: 1px solid var(--smoke);
+      padding: 1rem 0;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .hero-right {
+      position: relative;
+      background: linear-gradient(135deg, #111008 0%, #0d0d0d 50%, #0f0e08 100%);
+      overflow: hidden;
+    }
+
+    /* Geometric rings */
+    .geo-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.12);
+      pointer-events: none;
+    }
+
+    .geo-ring-1 {
+      width: 540px; height: 540px;
+      top: 5%; right: -15%;
+      animation: pulsate 7s ease-in-out infinite;
+    }
+
+    .geo-ring-2 {
+      width: 380px; height: 380px;
+      top: 15%; right: -5%;
+      animation: pulsate 7s ease-in-out infinite 1.5s;
+      border-color: rgba(201,168,76,0.07);
+    }
+
+    .geo-ring-3 {
+      width: 220px; height: 220px;
+      top: 30%; right: 10%;
+      animation: pulsate 7s ease-in-out infinite 3s;
+      border-color: rgba(201,168,76,0.18);
+    }
+
+    @keyframes pulsate {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.04); opacity: 0.5; }
+    }
+
+    /* Vertical center line decoration */
+    .hero-center-line {
+      position: absolute;
+      top: 10%; bottom: 10%;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.2), transparent);
+    }
+
+    /* Fashion silhouette SVG */
+    .hero-figure-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .fashion-svg {
+      width: 240px;
+      opacity: 0.22;
+    }
+
+    /* Spinning badge */
+    .badge-wrap {
+      position: absolute;
+      bottom: 3rem; right: 3rem;
+      width: 120px; height: 120px;
+      z-index: 3;
+    }
+
+    .badge-svg { animation: spin 22s linear infinite; }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .badge-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--gold);
+      pointer-events: none;
+    }
+
+    /* Year label */
+    .hero-year {
+      position: absolute;
+      bottom: 3rem; left: 0;
+      font-family: var(--serif);
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(201,168,76,0.06);
+      letter-spacing: -0.02em;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    /* ===================== STATS STRIP ===================== */
+    .stats-strip {
+      background: var(--charcoal);
+      border-top: 1px solid var(--smoke);
+      border-bottom: 1px solid var(--smoke);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--smoke);
+      transition: background 0.3s;
+    }
+
+    .stat-item:last-child { border-right: none; }
+    .stat-item:hover { background: #1c1c1c; }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      display: block;
+    }
+
+    /* ===================== SHARED SECTION ===================== */
+    .section-wrap {
+      padding: 7rem 5rem;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ===================== SERVICES ===================== */
+    #services { background: var(--obsidian); }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+
+    .services-header-right {
+      max-width: 340px;
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--smoke);
+      border: 1px solid var(--smoke);
+    }
+
+    .service-card {
+      background: var(--charcoal);
+      padding: 2.5rem 2.2rem;
+      transition: background 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover { background: #1b1b1b; }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .svc-num {
+      font-family: var(--serif);
+      font-size: 0.7rem;
+      color: rgba(201,168,76,0.55);
+      letter-spacing: 0.2em;
+      margin-bottom: 1.4rem;
+    }
+
+    .svc-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 0.9rem;
+    }
+
+    .svc-desc {
+      font-size: 0.77rem;
+      line-height: 1.9;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    /* ===================== CATEGORIES ===================== */
+    #categories {
+      background: var(--charcoal);
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .cat-card {
+      border: 1px solid var(--smoke);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      transition: border-color 0.35s, transform 0.35s;
+    }
+
+    .cat-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px);
+    }
+
+    /* Corner flourishes */
+    .cat-card .c { position: absolute; width: 14px; height: 14px; border-color: var(--gold); border-style: solid; transition: width 0.3s, height 0.3s; }
+    .cat-card .c.tl { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+    .cat-card .c.tr { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+    .cat-card .c.bl { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
+    .cat-card .c.br { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+    .cat-card:hover .c { width: 22px; height: 22px; }
+
+    .cat-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+
+    .cat-label {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 0.4rem;
+    }
+
+    .cat-age {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ===================== PROCESS ===================== */
+    #process { background: var(--obsidian); }
+
+    .process-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin-top: 5rem;
+      gap: 0;
+    }
+
+    .process-track::before {
+      content: '';
+      position: absolute;
+      top: 2.2rem;
+      left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+    }
+
+    .process-step {
+      text-align: center;
+      padding: 0 1.2rem;
+      position: relative;
+    }
+
+    .step-dot {
+      width: 4.5rem; height: 4.5rem;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin: 0 auto 1.8rem;
+      background: var(--obsidian);
+      position: relative;
+      z-index: 1;
+      transition: background 0.35s, color 0.35s, transform 0.35s;
+    }
+
+    .process-step:hover .step-dot {
+      background: var(--gold);
+      color: var(--obsidian);
+      transform: scale(1.1);
+    }
+
+    .step-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--ivory);
+      margin-bottom: 0.6rem;
+    }
+
+    .step-text {
+      font-size: 0.73rem;
+      line-height: 1.85;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ===================== VISION BANNER ===================== */
+    .vision-banner {
+      background: linear-gradient(135deg, #0c0a05 0%, #14120a 50%, #0c0a05 100%);
+      border-top: 1px solid rgba(201,168,76,0.18);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+      padding: 6rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vision-banner::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 900px; height: 900px;
+      border: 1px solid rgba(201,168,76,0.04);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .vision-banner::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 600px; height: 600px;
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .vision-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.2vw, 3rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 820px;
+      margin: 0 auto 2rem;
+      color: var(--ivory);
+      position: relative;
+      z-index: 1;
+    }
+
+    .vision-quote span { color: var(--gold); }
+
+    .vision-src {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===================== APPLY / FORM ===================== */
+    #apply {
+      background: var(--charcoal);
+    }
+
+    .apply-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .apply-left p {
+      font-size: 0.82rem;
+      line-height: 1.95;
+      color: var(--muted);
+      margin: 1.5rem 0 2.5rem;
+      max-width: 380px;
+    }
+
+    .benefits { list-style: none; margin-bottom: 2.5rem; }
+    .benefits li {
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--smoke);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .benefits li::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Form */
+    .apply-form { display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group { display: flex; flex-direction: column; }
+
+    .form-group label {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--smoke);
+      border: 1px solid #333;
+      color: var(--ivory);
+      padding: 0.85rem 1.1rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #555;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group select option { background: #1a1a1a; }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit {
+      background: var(--gold);
+      color: var(--obsidian);
+      border: none;
+      padding: 1.1rem 3rem;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--obsidian);
+      border-top: 1px solid var(--smoke);
+      padding: 3rem 5rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--smoke);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand-logo span { font-style: italic; color: var(--ivory); }
+
+    .footer-tagline {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 260px;
+    }
+
+    .footer-col-title {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.7rem; }
+    .footer-col ul li a {
+      font-size: 0.77rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      color: #555;
+      text-transform: uppercase;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-social a {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-social a:hover { color: var(--gold); }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Intersection Observer reveals */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+    .reveal-delay-5 { transition-delay: 0.58s; }
+
+    /* ===================== SCROLLBAR ===================== */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--obsidian); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Ticker -->
+  <div class="ticker-bar">
+    <span class="ticker-track">
+      Runway &nbsp;·&nbsp; Fashion Modeling &nbsp;·&nbsp; Editorial &nbsp;·&nbsp; Photo Modeling &nbsp;·&nbsp; Facial Modeling &nbsp;·&nbsp; Brand Influencing &nbsp;·&nbsp; Ushering &nbsp;·&nbsp; Pageantry &nbsp;·&nbsp; Corporate Modeling &nbsp;·&nbsp; Kid Models &nbsp;·&nbsp; Teen Models &nbsp;·&nbsp; Petite Models &nbsp;·&nbsp; Plus Size Models &nbsp;&nbsp;&nbsp;&nbsp;
+      Runway &nbsp;·&nbsp; Fashion Modeling &nbsp;·&nbsp; Editorial &nbsp;·&nbsp; Photo Modeling &nbsp;·&nbsp; Facial Modeling &nbsp;·&nbsp; Brand Influencing &nbsp;·&nbsp; Ushering &nbsp;·&nbsp; Pageantry &nbsp;·&nbsp; Corporate Modeling &nbsp;·&nbsp; Kid Models &nbsp;·&nbsp; Teen Models &nbsp;·&nbsp; Petite Models &nbsp;·&nbsp; Plus Size Models
+    </span>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-logo">Elite<span>Model</span> Agency</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#categories">Models</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#apply">Apply</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Begin Journey</button>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">
+        <span class="eyebrow-line"></span>
+        Nigeria's Premier Professional Modeling Agency
+      </div>
+
+      <h1 class="hero-title">
+        We Don't Just<br>Find Models.<br>
+        <span class="italic-gold">We Create Them.</span>
+      </h1>
+
+      <p class="hero-sub">
+        From raw potential to polished professional — we scout, groom, train and launch careers across runway, fashion, editorial, brand representation and beyond. Where interest becomes a career.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now</button>
+        <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Our Services</button>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <!-- Geometric Rings -->
+      <div class="geo-ring geo-ring-1"></div>
+      <div class="geo-ring geo-ring-2"></div>
+      <div class="geo-ring geo-ring-3"></div>
+      <div class="hero-center-line"></div>
+
+      <!-- Fashion Silhouette -->
+      <div class="hero-figure-wrap">
+        <svg class="fashion-svg" viewBox="0 0 200 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Head -->
+          <ellipse cx="100" cy="46" rx="26" ry="30" fill="#C9A84C" opacity="0.7"/>
+          <!-- Neck -->
+          <rect x="92" y="73" width="16" height="18" rx="3" fill="#C9A84C" opacity="0.5"/>
+          <!-- Torso -->
+          <path d="M68 90 Q100 78 132 90 L138 200 Q100 210 62 200 Z" fill="#C9A84C" opacity="0.4"/>
+          <!-- Left Arm -->
+          <path d="M68 95 Q42 110 28 180 L38 185 Q52 118 74 104 Z" fill="#C9A84C" opacity="0.3"/>
+          <!-- Right Arm -->
+          <path d="M132 95 Q158 110 172 180 L162 185 Q148 118 126 104 Z" fill="#C9A84C" opacity="0.3"/>
+          <!-- Left hand -->
+          <ellipse cx="33" cy="186" rx="8" ry="6" fill="#C9A84C" opacity="0.25"/>
+          <!-- Right hand -->
+          <ellipse cx="167" cy="186" rx="8" ry="6" fill="#C9A84C" opacity="0.25"/>
+          <!-- Hips -->
+          <path d="M62 200 Q100 215 138 200 L142 240 Q100 252 58 240 Z" fill="#C9A84C" opacity="0.35"/>
+          <!-- Left Leg -->
+          <path d="M62 240 L58 420 L78 422 L84 245 Z" fill="#C9A84C" opacity="0.3"/>
+          <!-- Right Leg -->
+          <path d="M138 240 L142 420 L122 422 L116 245 Z" fill="#C9A84C" opacity="0.3"/>
+          <!-- Left Foot -->
+          <ellipse cx="68" cy="426" rx="15" ry="7" fill="#C9A84C" opacity="0.22"/>
+          <!-- Right Foot -->
+          <ellipse cx="132" cy="426" rx="15" ry="7" fill="#C9A84C" opacity="0.22"/>
+          <!-- Hair suggestion -->
+          <path d="M74 28 Q100 8 126 28 Q130 10 100 4 Q70 10 74 28Z" fill="#C9A84C" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- Watermark year -->
+      <div class="hero-year">2024</div>
+
+      <!-- Spinning Badge -->
+      <div class="badge-wrap">
+        <svg class="badge-svg" width="120" height="120" viewBox="0 0 120 120">
+          <defs>
+            <path id="badge-circle" d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+          </defs>
+          <circle cx="60" cy="60" r="58" fill="none" stroke="#C9A84C" stroke-width="0.6"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="0.6"/>
+          <text fill="#C9A84C" font-size="6.5" font-family="Didact Gothic" letter-spacing="3.5">
+            <textPath href="#badge-circle">EST. 2024 · ELITE MODEL AGENCY · NIGERIA · </textPath>
+          </text>
+        </svg>
+        <div class="badge-center">EMA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS ===================== -->
+  <div class="stats-strip">
+    <div class="stat-item reveal">
+      <span class="stat-num">500+</span>
+      <span class="stat-label">Models Launched</span>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <span class="stat-num">8</span>
+      <span class="stat-label">Model Specialties</span>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <span class="stat-num">100+</span>
+      <span class="stat-label">Brand Partnerships</span>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <span class="stat-num">360°</span>
+      <span class="stat-label">Career Management</span>
+    </div>
+  </div>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section-wrap" id="services">
+    <div class="services-header">
+      <div>
+        <div class="section-tag reveal">What We Offer</div>
+        <h2 class="section-title reveal reveal-delay-1">Comprehensive<br><em>Modeling Services</em></h2>
+      </div>
+      <p class="services-header-right reveal reveal-delay-2">
+        We provide end-to-end modeling career solutions — from scouting raw talent to managing established professionals across every niche of the industry, including the corporate world.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-title">Runway & Fashion</div>
+        <p class="svc-desc">Elite runway coaching and high-fashion event preparation. We train models for designer presentations, fashion week events and editorial shows with precision, confidence and discipline.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-num">02</div>
+        <div class="svc-title">Photo & Editorial</div>
+        <p class="svc-desc">Professional photo modeling and editorial training. From studio fundamentals to advanced posing and expressions — we turn your portfolio into your most powerful career tool.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-num">03</div>
+        <div class="svc-title">Facial Modeling</div>
+        <p class="svc-desc">Specialized training for facial and beauty campaigns. Expression control, skincare discipline and beauty techniques tailored for cosmetics, skincare and beauty brand campaigns.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="svc-num">04</div>
+        <div class="svc-title">Brand Influencing</div>
+        <p class="svc-desc">We prepare models for brand ambassador roles, product representation, digital influence and corporate endorsement — bridging the gap between modeling and modern marketing.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="svc-num">05</div>
+        <div class="svc-title">Pageantry</div>
+        <p class="svc-desc">Full pageant preparation — poise, stage presence, interview coaching, wardrobe strategy and public speaking. We have produced titleholders at local, national and international levels.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-5">
+        <div class="svc-num">06</div>
+        <div class="svc-title">Ushering & Events</div>
+        <p class="svc-desc">Professional ushering placement and corporate events representation. Groomed, polished models for hospitality, VIP corporate functions, conferences and high-profile public events.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CATEGORIES ===================== -->
+  <section class="section-wrap" id="categories">
+    <div class="section-tag reveal">Who We Welcome</div>
+    <h2 class="section-title reveal reveal-delay-1">We Model<br><em>Every Form of Beauty</em></h2>
+
+    <div class="categories-grid">
+      <div class="cat-card reveal reveal-delay-1">
+        <span class="c tl"></span><span class="c tr"></span>
+        <span class="c bl"></span><span class="c br"></span>
+        <span class="cat-icon">🌟</span>
+        <div class="cat-label">Kid Models</div>
+        <div class="cat-age">Ages 4 – 12</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2">
+        <span class="c tl"></span><span class="c tr"></span>
+        <span class="c bl"></span><span class="c br"></span>
+        <span class="cat-icon">✨</span>
+        <div class="cat-label">Teen Models</div>
+        <div class="cat-age">Ages 13 – 17</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-3">
+        <span class="c tl"></span><span class="c tr"></span>
+        <span class="c bl"></span><span class="c br"></span>
+        <span class="cat-icon">💫</span>
+        <div class="cat-label">Petite Models</div>
+        <div class="cat-age">All Ages Welcome</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-4">
+        <span class="c tl"></span><span class="c tr"></span>
+        <span class="c bl"></span><span class="c br"></span>
+        <span class="cat-icon">👑</span>
+        <div class="cat-label">Plus Size Models</div>
+        <div class="cat-age">Celebrating Every Size</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS ===================== -->
+  <section class="section-wrap" id="process" style="background: var(--obsidian);">
+    <div class="section-tag reveal">How It Works</div>
+    <h2 class="section-title reveal reveal-delay-1">Your Journey to<br><em>Professional Modeling</em></h2>
+
+    <div class="process-track">
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-dot">01</div>
+        <div class="step-title">Scout & Discover</div>
+        <p class="step-text">We identify raw talent and unique potential in aspiring models of all ages, sizes and backgrounds across Nigeria.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-dot">02</div>
+        <div class="step-title">Assess & Enroll</div>
+        <p class="step-text">Comprehensive assessment to match each model with the right training pathway and most suitable career specialization.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-dot">03</div>
+        <div class="step-title">Groom & Train</div>
+        <p class="step-text">Intensive grooming, runway coaching, photoshoot training, corporate development and personal growth sessions.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-dot">04</div>
+        <div class="step-title">Build & Brand</div>
+        <p class="step-text">Portfolio creation, social media positioning, personal brand identity and market-ready presentation for each model.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-5">
+        <div class="step-dot">05</div>
+        <div class="step-title">Launch & Manage</div>
+        <p class="step-text">Active career placement, booking management, brand deal negotiations and ongoing career development support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VISION ===================== -->
+  <div class="vision-banner">
+    <p class="vision-quote reveal">
+      "We don't just launch careers —<br>we <span>bridge the modeling world</span><br>with the corporate future."
+    </p>
+    <div class="vision-src reveal reveal-delay-1">Our Vision &nbsp;·&nbsp; Innovation &nbsp;·&nbsp; Excellence &nbsp;·&nbsp; Impact</div>
+  </div>
+
+  <!-- ===================== APPLY ===================== -->
+  <section class="section-wrap" id="apply">
+    <div class="apply-inner">
+      <div class="apply-left">
+        <div class="section-tag reveal">Begin Your Journey</div>
+        <h2 class="section-title reveal reveal-delay-1">Ready to Start<br>Your <em>Modeling Career?</em></h2>
+        <p class="reveal reveal-delay-2">
+          Whether you're a parent enrolling your child, a teen with big dreams, or an adult ready to turn interest into a profession — we have a path designed for you. Every great model started somewhere.
+        </p>
+
+        <ul class="benefits reveal reveal-delay-3">
+          <li>Professional scouting and talent assessment</li>
+          <li>Specialized grooming and runway training</li>
+          <li>Portfolio development and brand positioning</li>
+          <li>Corporate modeling and business world integration</li>
+          <li>Active booking, placement and career management</li>
+          <li>Open to Kids, Teens, Petite and Plus Size models</li>
+        </ul>
+      </div>
+
+      <div>
+        <form class="apply-form reveal reveal-delay-2" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Your first name" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Your last name" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+234 xxx xxx xxxx" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Model Category</label>
+              <select required>
+                <option value="" disabled selected>Select category</option>
+                <option>Kid Model (Ages 4–12)</option>
+                <option>Teen Model (Ages 13–17)</option>
+                <option>Petite Model</option>
+                <option>Plus Size Model</option>
+                <option>Standard Adult Model</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Area of Interest</label>
+              <select>
+                <option value="" disabled selected>Select specialty</option>
+                <option>Runway & Fashion</option>
+                <option>Photo & Editorial</option>
+                <option>Facial Modeling</option>
+                <option>Brand Influencing</option>
+                <option>Pageantry</option>
+                <option>Ushering & Events</option>
+                <option>All / Open to Opportunities</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Tell Us About Yourself</label>
+            <textarea placeholder="Share your modeling background, why you want to join EMA, and any relevant experience..."></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">Elite<span>Model</span> Agency</div>
+        <p class="footer-tagline">Nigeria's premier modeling agency — scouting, grooming, training and launching professional modeling careers since 2024. Where interest becomes excellence.</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Services</div>
+        <ul>
+          <li><a href="#services">Runway & Fashion</a></li>
+          <li><a href="#services">Photo & Editorial</a></li>
+          <li><a href="#services">Facial Modeling</a></li>
+          <li><a href="#services">Brand Influencing</a></li>
+          <li><a href="#services">Pageantry</a></li>
+          <li><a href="#services">Ushering & Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Model Types</div>
+        <ul>
+          <li><a href="#categories">Kid Models</a></li>
+          <li><a href="#categories">Teen Models</a></li>
+          <li><a href="#categories">Petite Models</a></li>
+          <li><a href="#categories">Plus Size Models</a></li>
+          <li><a href="#categories">Adult Models</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Agency</div>
+        <ul>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#apply">Apply Now</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2024 Elite Model Agency &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; Nigeria</div>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script>
+    /* --- Custom Cursor --- */
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    (function animateRing() {
+      rx += (mx - rx) * 0.1;
+      ry += (my - ry) * 0.1;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('button, a, .service-card, .cat-card, .process-step').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+        ring.style.width  = '56px';
+        ring.style.height = '56px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        ring.style.width  = '36px';
+        ring.style.height = '36px';
+      });
+    });
+
+    /* --- Intersection Observer for reveal animations --- */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    /* --- Nav background on scroll --- */
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        nav.style.background = 'rgba(10,10,10,0.97)';
+        nav.style.backdropFilter = 'blur(6px)';
+      } else {
+        nav.style.background = 'linear-gradient(to bottom, rgba(10,10,10,0.92), transparent)';
+        nav.style.backdropFilter = 'none';
+      }
+    });
+
+    /* --- Form submit handler --- */
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Application Sent ✓';
+      btn.style.background = '#3a6b3a';
+      btn.style.color = '#fff';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'Submit Application';
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 4000);
+    }
+
+    /* --- Stat counter animation --- */
+    function animateCounter(el, target, suffix) {
+      let start = 0;
+      const duration = 1800;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const nums = entry.target.querySelectorAll('.stat-num');
+          const data = [
+            { target: 500, suffix: '+' },
+            { target: 8,   suffix: ''  },
+            { target: 100, suffix: '+' },
+            { target: 360, suffix: '°' }
+          ];
+          nums.forEach((el, i) => {
+            if (data[i]) animateCounter(el, data[i].target, data[i].suffix);
+          });
+          statObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsStrip = document.querySelector('.stats-strip');
+    if (statsStrip) statObserver.observe(statsStrip);
+  </script>
+</body>
+</html>
